@@ -26,6 +26,7 @@ app.use('/', viewsRouter);
 initMongoDB();
 
 app.use("/", routes);
+
 const httpServer = app.listen(PORT, () => {
   console.log(`Server OK ${PORT}`);
   socketManager(httpServer)
