@@ -21,7 +21,7 @@ app.engine('handlebars', handlebars.engine());
 app.set('view engine', 'handlebars');  
 app.set('views', __dirname+'/views');  
 
-app.use('/chat', viewsRouter);
+app.use('/', viewsRouter);
 
 initMongoDB();
 
@@ -30,3 +30,4 @@ const httpServer = app.listen(PORT, () => {
   console.log(`Server OK ${PORT}`);
   socketManager(httpServer)
 });
+
