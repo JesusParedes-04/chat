@@ -3,9 +3,8 @@ import { __dirname } from './utils.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import handlebars from 'express-handlebars';
 import socketManager from './sockets/chat.socket.js';
-import { PORT} from "./config.js";
 import { initMongoDB } from "./persistence/daos/mongodb/models/connection.js";
-
+import config from "./config.js"
 
 
 const app = express();
@@ -27,6 +26,8 @@ router.get('/', (req, res) => {
 initMongoDB();
 app.use('/', router);
 
+
+const PORT = config.PORT
 const httpServer = app.listen(PORT, () => {
   console.log(`Server OK ${PORT}`);
   socketManager(httpServer)

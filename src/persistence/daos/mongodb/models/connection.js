@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
-import { REMOTE_MONGO_URL } from "../../../../config.js";
+import config from "../../../../config.js"
 
-export const connectionString = REMOTE_MONGO_URL
+
+export const connectionString = config.REMOTE_MONGO_URL
 
 
 export const initMongoDB = async () => {
