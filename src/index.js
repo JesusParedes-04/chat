@@ -2,16 +2,14 @@ import express from 'express';
 import { __dirname } from './utils.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import handlebars from 'express-handlebars';
-import viewsRouter from './routes/views.routes.js';
 import socketManager from './sockets/chat.socket.js';
-import routes from "./routes/views.routes.js"
-import {PORT} from "./config.js";
+import { PORT} from "./config.js";
 import { initMongoDB } from "./persistence/daos/mongodb/models/connection.js";
-import 'dotenv/config.js'
 
 
 
 const app = express();
+const router = express.Router();
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
@@ -22,11 +20,12 @@ app.engine('handlebars', handlebars.engine());
 app.set('view engine', 'handlebars');  
 app.set('views', __dirname+'/views');  
 
-app.use('/', viewsRouter);
+router.get('/', (req, res) => {
+  res.render('chat')
+});
 
 initMongoDB();
-
-app.use("/", routes);
+app.use('/', router);
 
 const httpServer = app.listen(PORT, () => {
   console.log(`Server OK ${PORT}`);
