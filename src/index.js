@@ -5,8 +5,9 @@ import handlebars from 'express-handlebars';
 import viewsRouter from './routes/views.routes.js';
 import socketManager from './sockets/chat.socket.js';
 import routes from "./routes/views.routes.js"
-import { PORT,} from "./config.js";
+import {PORT} from "./config.js";
 import { initMongoDB } from "./persistence/daos/mongodb/models/connection.js";
+import 'dotenv/config.js'
 
 
 
