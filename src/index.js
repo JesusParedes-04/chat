@@ -26,9 +26,12 @@ router.get('/', (req, res) => {
 initMongoDB();
 app.use('/', router);
 
+app.listen(PORT, () => {
+  console.log(`Server OK ${PORT}`);})
 
-const httpServer = app.listen(PORT, () => {
-  console.log(`Server OK ${PORT}`);
-  socketManager(httpServer)
-});
+
+// const httpServer = app.listen(PORT, () => {
+//   console.log(`Server OK ${PORT}`);
+//   // socketManager(httpServer)
+// });
 
