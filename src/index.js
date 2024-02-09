@@ -25,6 +25,6 @@ app.use('/', routes);
 
 const httpServer = app.listen(config.PORT, () => {
   console.log(`Server OK ${config.PORT}`);
-  socketManager(httpServer)
 });
 
+socketManager(httpServer)
