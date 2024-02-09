@@ -2,6 +2,7 @@ import express from 'express';
 import { __dirname } from './utils.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import handlebars from 'express-handlebars';
+import routes from "./routes/index.js";
 import socketManager from './sockets/chat.socket.js';
 import { initMongoDB } from "./persistence/daos/mongodb/models/connection.js";
 
@@ -19,19 +20,13 @@ app.engine('handlebars', handlebars.engine());
 app.set('view engine', 'handlebars');  
 app.set('views', __dirname+'/views');  
 
-router.get('/', (req, res) => {
-  res.render('chat')
-});
 
 initMongoDB();
-app.use('/', router);
-
-app.listen(PORT, () => {
-  console.log(`Server OK ${PORT}`);})
+app.use('/', routes);
 
 
-// const httpServer = app.listen(PORT, () => {
-//   console.log(`Server OK ${PORT}`);
-//   // socketManager(httpServer)
-// });
+const httpServer = app.listen(PORT, () => {
+  console.log(`Server OK ${PORT}`);
+  socketManager(httpServer)
+});
 
