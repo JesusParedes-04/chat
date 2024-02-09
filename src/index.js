@@ -5,11 +5,9 @@ import handlebars from 'express-handlebars';
 import routes from "./routes/index.js";
 import socketManager from './sockets/chat.socket.js';
 import { initMongoDB } from "./persistence/daos/mongodb/models/connection.js";
-
-const PORT = process.env.PORT || 3000;
+import config from './config.js';
 
 const app = express();
-const router = express.Router();
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
@@ -25,8 +23,8 @@ initMongoDB();
 app.use('/', routes);
 
 
-const httpServer = app.listen(PORT, () => {
-  console.log(`Server OK ${PORT}`);
+const httpServer = app.listen(config.PORT, () => {
+  console.log(`Server OK ${config.PORT}`);
   socketManager(httpServer)
 });
 
