@@ -8,7 +8,6 @@ import { initMongoDB } from "./persistence/daos/mongodb/models/connection.js";
 import config from './config.js';
 
 const app = express();
-
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(express.static(__dirname + '/public'));
@@ -20,9 +19,9 @@ app.set('views', __dirname+'/views');
 
 
 initMongoDB();
+
+
 app.use('/', routes);
-
-
 const httpServer = app.listen(config.PORT, () => {
   console.log(`Server OK ${config.PORT}`);
 });
