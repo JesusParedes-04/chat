@@ -1,15 +1,17 @@
 const socket = io();
 
+
 let username = null;
 
 if (!username) {
   Swal.fire({
-    title: '¡Welcome to chat!',
-    text: 'Insert your username',
+    title: '¡Bienvenido!',
+    text: 'Coloca tu nombre',
     input: 'text',
     inputValidator: (value) => {
-      if (!value) return 'Your username is required';
+      if (!value) return 'Nombre requerido';
     },
+    allowOutsideClick: false, // Evitar que se cierre al hacer clic fuera del cartel
   })
     .then((input) => {
       username = input.value;
@@ -28,6 +30,17 @@ btn.addEventListener('click', () => {
     message: message.value,
   });
   message.value = '';
+});
+
+
+message.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') {
+    socket.emit('chat:message', {
+      username,
+      message: message.value,
+    });
+    message.value = '';
+  }
 });
 
 socket.on('message', (msg) => {
@@ -57,5 +70,22 @@ message.addEventListener('keypress', () => {
 });
 
 socket.on('chat:typing', (user) => {
-  actions.innerHTML = `<p>${user} is writing a message...</p>`;
+  actions.innerHTML = `<p>${user} está escribiendo un mensaje...</p>`;
 });
+
+function toggleMode() {
+  const body = document.body;
+  const modeToggle = document.getElementById('mode-toggle');
+  
+  // Cambiar entre light y dark mode
+  if (body.classList.contains('dark-mode')) {
+    body.classList.remove('dark-mode');
+    modeToggle.innerHTML = '<i class="bx bxs-moon"></i>'; // Cambiar el icono a luna
+  } else {
+    body.classList.add('dark-mode');
+    modeToggle.innerHTML = '<i class="bx bxs-sun"></i>'; // Cambiar el icono a sol
+  }
+}
+
+// Agregar evento clic al botón para alternar los modos
+document.getElementById('mode-toggle').addEventListener('click', toggleMode);

@@ -1,15 +1,24 @@
 <div class="container-fluid">
+
+<div class="direction-toggle">
+  <button id="mode-toggle" class="mode-toggle"><i class='bx bxs-moon'></i></button> 
+</div>
+
   <div class="row">
     <div class="col-md-8 offset-md-2">
-      <div id="chat-container" class="mt-5">
+      <div id="chat-container" class="main-chat-container">
         <div id="chat-window">
           <div id="output"></div>
           <div id="actions"></div>
         </div>
-        <div class="input-group mb-3">
-          <input type="text" class="form-control rounded p-3 mb-5" id="message" placeholder="message" />
-          <button class="rounded p-3 mt-5 mb-5 btn-custom-bg" id="send">Send</button>
-        </div>
+      </div>
+      <div class="mb-3 mt-2 input-group-chat">
+        <input type="text" class="form-control" id="message" placeholder="Escribe algo por aquí..." />
+        <button class="rounded-circle p-3 btn-send" id="send">
+          <svg fill="#fff" width="36px" height="36px" viewBox="0 0 36 36" version="1.1" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <path d="M18,6L9.75,17L17,9.81V28.94a1,1,0,0,0,2,0V9.81L26.25,17a1,1,0,0,0,1.41-1.42L27.66,15.61Z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
       </div>
     </div>
   </div>

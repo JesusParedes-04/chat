@@ -9,17 +9,6 @@ const socketManager = (httpServer) => {
   const socketServer = new Server(httpServer);
 
   socketServer.on('connection', (socket) => {
-    console.log('New Connection!', socket.id);
-
-    socket.on('guardarProducto', async (productoData) => {});
-
-    socket.on('disconnect', () => {
-      console.log('User disconnected!', socket.id);
-    });
-
-    socket.on('newUser', (user) => {
-      console.log(`>${user} inició sesión`);
-    });
 
     socket.on('chat:message', async (msg) => {
       const newMessage = await messagesDao.create(msg);
