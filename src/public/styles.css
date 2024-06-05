@@ -96,6 +96,7 @@ html, body {
   display: flex;
   flex-direction: row;
   justify-content:end;
+  margin-bottom: 20px;
 margin-right: 120px;
 
 }
@@ -107,4 +108,11 @@ margin-right: 120px;
 
 .bx.bxs-moon:not(.dark-mode) {
   color:#4b5563
+}
+
+@media (max-width: 768px) {
+  .direction-toggle {
+    justify-content: center; /* Centra el botón en pantallas más pequeñas */
+    margin-right: 0;
+  }
 }
